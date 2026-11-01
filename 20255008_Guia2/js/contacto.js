@@ -1,0 +1,1 @@
+document.querySelector("#formulario").addEventListener("submit", function(event){event.preventDefault();document.querySelector("#respuesta").textContent="Formulario validado correctamente. Esta demostración no envía mensajes.";this.reset();});
