@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/stylesFunciones.css" rel="stylesheet">
+    <title>Validaciones con expresiones regulares</title>
+</head>
+<body>
+    <div class="container py-5">
+        <a href="../indexFunciones.html">Volver a funciones</a>
+        <div class="shadow-lg p-4 mt-3 bg-body rounded">
+            <h2>Ficha de estudiante</h2>
+            <p>Ejercicio complementario 3: validación de campos con expresiones regulares.</p>
+            <form id="idFormValidaciones" novalidate>
+                <div class="row">
+                    <div class="col-md-6 mb-3"><label class="form-label" for="carnet">Carnet (AB001)</label><input class="form-control" id="carnet" required></div>
+                    <div class="col-md-6 mb-3"><label class="form-label" for="nombre">Nombre completo</label><input class="form-control" id="nombre" required></div>
+                    <div class="col-md-6 mb-3"><label class="form-label" for="dui">DUI (########-#)</label><input class="form-control" id="dui" required></div>
+                    <div class="col-md-6 mb-3"><label class="form-label" for="nit">NIT (####-######-###-#)</label><input class="form-control" id="nit" required></div>
+                    <div class="col-md-6 mb-3"><label class="form-label" for="fecha">Fecha de nacimiento (DD/MM/AAAA)</label><input class="form-control" id="fecha" placeholder="DD/MM/AAAA" required></div>
+                    <div class="col-md-6 mb-3"><label class="form-label" for="correo">Correo electrónico</label><input class="form-control" id="correo" required></div>
+                    <div class="col-md-6 mb-3"><label class="form-label" for="edad">Edad (solo números)</label><input class="form-control" id="edad" required></div>
+                </div>
+                <button type="submit" class="btn btn-success">Validar ficha</button>
+                <button type="reset" class="btn btn-secondary">Limpiar</button>
+            </form>
+            <div id="resultadoValidaciones" class="mt-3" aria-live="polite"></div>
+            <h3 class="mt-4">Investigación: expresiones regulares</h3>
+            <p>Una expresión regular es un patrón que permite comprobar la forma de una cadena.
+            En JavaScript se utiliza el método <code>test()</code> para saber si el texto coincide con el patrón.</p>
+            <ul>
+                <li><code>^</code> indica inicio y <code>$</code> indica final del texto.</li>
+                <li><code>[A-Z]</code> representa una letra mayúscula y <code>\d</code> un dígito.</li>
+                <li><code>{n}</code> indica una cantidad exacta de caracteres.</li>
+                <li><code>+</code> significa una o más repeticiones.</li>
+            </ul>
+            <p>El patrón valida el formato de la fecha; adicionalmente se comprueba que sea una fecha real.</p>
+        </div>
+    </div>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/validaciones.js" defer></script>
+</body>
+</html>
