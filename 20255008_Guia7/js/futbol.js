@@ -1,7 +1,11 @@
 
 'use strict';
 
-const API_PROXY = 'URL_DE_TU_INTERMEDIARIO';
+const API_HOST = 'teambase-teams-players-leagues-and-fixtures.p.rapidapi.com';
+const API_URL = `https://${API_HOST}/team`;
+const LEAGUES_URL = `https://${API_HOST}/leagues`;
+
+const API_KEY = 'd1b1dc386fmsh5a64383ad855f5fp148d71jsn01b27f6bea0b';
 
 const $ = id => document.getElementById(id);
 
