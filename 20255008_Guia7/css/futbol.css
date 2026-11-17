@@ -1,0 +1,10 @@
+body { background: #f3f6fa; color: #172335; }
+.hero { background: linear-gradient(125deg, #0e2d29, #17675b); color: white; }
+.card { border: 1px solid #dfe6ee; border-radius: 16px; box-shadow: 0 8px 25px #102b4510; }
+.equipo { width: 100%; text-align: left; border: 1px solid #e0e8f0; background: #fff; border-radius: 12px; padding: 16px; transition: border-color .15s; }
+.equipo:hover, .equipo:focus { border-color: #147d70; background: #f2faf8; }
+.detalle-sticky { position: sticky; top: 20px; }
+#estado:empty, #estadoDetalle:empty { display: none; }
+.escudo { width: 56px; height: 56px; object-fit: contain; flex-shrink: 0; }
+.escudo-detalle { width: 100px; height: 100px; object-fit: contain; }
+.descripcion { line-height: 1.65; max-height: 240px; overflow-y: auto; white-space: pre-line; }
