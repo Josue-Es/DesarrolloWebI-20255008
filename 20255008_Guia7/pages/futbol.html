@@ -3,28 +3,38 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Fútbol Explorer | Guía 7</title>
+
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/futbol.css">
 </head>
+
 <body>
     <header class="bg-dark text-white py-3">
         <div class="container d-flex justify-content-between align-items-center">
-            <a class="text-white text-decoration-none fw-bold" href="../index.html">
+            <a
+                class="text-white text-decoration-none fw-bold"
+                href="../index.html"
+            >
                 DOM · Guía 7
             </a>
+
             <span>Fútbol Explorer</span>
         </div>
     </header>
 
     <main class="container py-5">
+
         <div class="hero p-4 p-md-5 rounded-4 mb-4">
             <p class="text-uppercase small fw-bold">
                 Ejercicio complementario 2
             </p>
+
             <h1 class="display-5 fw-bold">
                 Explorador de equipos de fútbol
             </h1>
+
             <p class="mb-0">
                 Buscá equipos y consultá sus detalles mediante
                 TeamBase en RapidAPI, Fetch y async/await.
@@ -32,39 +42,21 @@
         </div>
 
         <section class="card p-4 mb-4">
-            <h2 class="h5">Buscar equipos con RapidAPI</h2>
+            <h2 class="h5">
+                Buscar equipos con RapidAPI
+            </h2>
 
             <p class="text-secondary small">
                 TeamBase: búsqueda por nombre y detalle por ID.
                 La API puede devolver una cantidad limitada de coincidencias.
             </p>
 
-            <div class="mb-3">
-                <label for="claveApi" class="form-label">
-                    Clave de acceso a RapidAPI
-                </label>
-
-                <input
-                    id="claveApi"
-                    type="password"
-                    class="form-control"
-                    autocomplete="off"
-                    placeholder="Ingresá tu clave de RapidAPI"
-                >
-
-                <small class="text-secondary">
-                    Para realizar consultas en tiempo real se necesita
-                    una clave válida de RapidAPI con acceso a TeamBase.
-                    La clave se utiliza únicamente durante la sesión
-                    y no se guarda en los archivos del proyecto.
-                </small>
-            </div>
-
             <div class="row g-2">
                 <div class="col-md-8">
                     <label for="consulta" class="form-label">
                         Nombre del equipo
                     </label>
+
                     <input
                         id="consulta"
                         class="form-control"
@@ -113,7 +105,9 @@
 
         <section class="card p-4 mb-4">
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                <h2 class="h5 mb-0">Ligas disponibles</h2>
+                <h2 class="h5 mb-0">
+                    Ligas disponibles
+                </h2>
 
                 <button
                     id="cargarLigas"
@@ -125,20 +119,30 @@
             </div>
 
             <p class="text-secondary small mt-2">
-                Listado obtenido mediante el endpoint League Browse de TeamBase.
+                Listado obtenido mediante el endpoint
+                League Browse de TeamBase.
             </p>
 
-            <p id="estadoLigas" role="status" aria-live="polite">
+            <p
+                id="estadoLigas"
+                role="status"
+                aria-live="polite"
+            >
                 Presioná Consultar ligas para cargar la información.
             </p>
 
-            <ul id="ligas" class="list-group list-group-flush"></ul>
+            <ul
+                id="ligas"
+                class="list-group list-group-flush"
+            ></ul>
         </section>
 
         <section class="row g-4">
             <div class="col-lg-7">
                 <div class="card p-4">
-                    <h2 class="h4 mb-3">Listado de equipos</h2>
+                    <h2 class="h4 mb-3">
+                        Listado de equipos
+                    </h2>
 
                     <label for="buscar" class="form-label">
                         Filtrar resultados de la búsqueda
@@ -151,19 +155,32 @@
                         autocomplete="off"
                     >
 
-                    <p id="estado" role="status" aria-live="polite">
+                    <p
+                        id="estado"
+                        role="status"
+                        aria-live="polite"
+                    >
                         Preparando consulta...
                     </p>
 
-                    <div id="equipos" class="row g-3"></div>
+                    <div
+                        id="equipos"
+                        class="row g-3"
+                    ></div>
                 </div>
             </div>
 
             <div class="col-lg-5">
                 <div class="card p-4 detalle-sticky">
-                    <h2 class="h4">Detalle del equipo</h2>
+                    <h2 class="h4">
+                        Detalle del equipo
+                    </h2>
 
-                    <p id="estadoDetalle" role="status" aria-live="polite">
+                    <p
+                        id="estadoDetalle"
+                        role="status"
+                        aria-live="polite"
+                    >
                         Seleccioná un equipo del listado.
                     </p>
 
@@ -173,9 +190,10 @@
         </section>
 
         <footer class="text-secondary small mt-4">
-            Fuente: TeamBase en RapidAPI; datos atribuidos a TheSportsDB.
-            La clave de RapidAPI no se almacena en archivos.
+            Fuente: TeamBase en RapidAPI;
+            datos atribuidos a TheSportsDB.
         </footer>
+
     </main>
 
     <script src="../js/futbol.js" defer></script>
