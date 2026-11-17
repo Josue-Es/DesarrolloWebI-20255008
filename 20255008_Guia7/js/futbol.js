@@ -170,22 +170,14 @@ function pintarEquipos() {
 
     if (!visibles.length) {
         estado.textContent = equipos.length
-            ? 'No hay equipos que coincidan con el filtro.'
-            : 'No se encontraron equipos con ese nombre.';
+            ? 'No hay equipos que coincidan con el filtro. Probá otro término.'
+            : 'Equipo no encontrado. Intentá con otro nombre.';
     }
 }
 
 async function cargarEquipos() {
     const version = ++versionLista;
     ++versionDetalle;
-
-    equipos = [];
-
-    equiposNodo.replaceChildren();
-    detalleNodo.replaceChildren();
-
-    estadoDetalle.textContent =
-        'Seleccioná un equipo del listado para ver sus detalles.';
 
     const termino = consulta.value.trim();
 
@@ -206,13 +198,15 @@ async function cargarEquipos() {
         }
 
         equipos = encontrados.filter(e => e && e.id && e.name);
-
+        detalleNodo.replaceChildren();
+        estadoDetalle.textContent = 'Seleccioná un equipo del listado para ver sus detalles.';
         pintarEquipos();
 
     } catch (error) {
         if (version === versionLista) {
-            estado.textContent =
-                `No se pudo cargar el listado: ${error.message}`;
+            estado.textContent = error.message.includes('límite')
+                ? 'Se alcanzó el límite de consultas de RapidAPI. Intentá más tarde.'
+                : 'No fue posible consultar los equipos en este momento. Intentá nuevamente.';
         }
     } finally {
         if (version === versionLista) {
@@ -344,8 +338,6 @@ async function cargarDetalle(id) {
 async function cargarLigas() {
     botonLigas.disabled = true;
 
-    listaLigas.replaceChildren();
-
     estadoLigas.textContent = 'Consultando ligas...';
 
     try {
@@ -379,6 +371,8 @@ async function cargarLigas() {
             l => l && l.name
         );
 
+        listaLigas.replaceChildren();
+
         for (const liga of ligas) {
             const elemento = nodo(
                 'li',
@@ -393,8 +387,9 @@ async function cargarLigas() {
             `${ligas.length} liga(s) recibida(s).`;
 
     } catch (error) {
-        estadoLigas.textContent =
-            `No se pudieron cargar las ligas: ${error.message}.`;
+        estadoLigas.textContent = error.message.includes('límite')
+            ? 'Se alcanzó el límite de consultas de RapidAPI. Intentá más tarde.'
+            : 'No se pudieron cargar las ligas. Intentá nuevamente más tarde.';
     } finally {
         botonLigas.disabled = false;
     }
