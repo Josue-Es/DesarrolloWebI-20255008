@@ -1,4 +1,3 @@
-
 'use strict';
 
 const API_HOST = 'teambase-teams-players-leagues-and-fixtures.p.rapidapi.com';
@@ -31,7 +30,9 @@ function nodo(tag, texto, clase = '') {
         elemento.textContent = String(texto);
     }
 
-    if (clase) elemento.className = clase;
+    if (clase) {
+        elemento.className = clase;
+    }
 
     return elemento;
 }
@@ -42,6 +43,7 @@ function imagenSegura(url, alt, clase) {
     }
 
     const imagen = nodo('img');
+
     imagen.src = url;
     imagen.alt = alt;
     imagen.className = clase;
@@ -52,17 +54,25 @@ function imagenSegura(url, alt, clase) {
 }
 
 async function solicitarEquipo(parametro, valor) {
-    const url = new URL(`${API_PROXY}/team`);
+    const url = new URL(API_URL);
     url.searchParams.set(parametro, valor);
 
-    const respuesta = await fetch(url);
+    const respuesta = await fetch(url, {
+        headers: {
+            'x-rapidapi-key': API_KEY,
+            'x-rapidapi-host': API_HOST,
+            Accept: 'application/json'
+        }
+    });
 
     if (respuesta.status === 401 || respuesta.status === 403) {
-        throw new Error('Acceso denegado a TeamBase.');
+        throw new Error(
+            'Acceso denegado: revisá la clave y la suscripción a TeamBase.'
+        );
     }
 
     if (respuesta.status === 429) {
-        throw new Error('Se alcanzó el límite de consultas.');
+        throw new Error('Se alcanzó el límite de consultas del plan.');
     }
 
     if (!respuesta.ok) {
@@ -76,16 +86,23 @@ async function solicitarEquipo(parametro, valor) {
     }
 
     if (parametro === 'id') {
-        if (!datos.team || typeof datos.team !== 'object' ||
-            Array.isArray(datos.team)) {
-            throw new Error('La API no devolvió el detalle esperado del equipo.');
+        if (
+            !datos.team ||
+            typeof datos.team !== 'object' ||
+            Array.isArray(datos.team)
+        ) {
+            throw new Error(
+                'La API no devolvió el detalle esperado del equipo.'
+            );
         }
 
         return [datos.team];
     }
 
     if (!Array.isArray(datos.teams)) {
-        throw new Error('La API no devolvió la colección esperada de equipos.');
+        throw new Error(
+            'La API no devolvió la colección esperada de equipos.'
+        );
     }
 
     return datos.teams;
@@ -119,17 +136,30 @@ function pintarEquipos() {
             'escudo'
         );
 
-        if (imagen) boton.appendChild(imagen);
+        if (imagen) {
+            boton.appendChild(imagen);
+        }
 
         const datos = nodo('span');
 
         datos.append(
-            nodo('strong', equipo.alternate || equipo.name || 'Equipo', 'd-block'),
-            nodo('small', equipo.league || 'Liga no disponible', 'text-secondary')
+            nodo(
+                'strong',
+                equipo.alternate || equipo.name || 'Equipo',
+                'd-block'
+            ),
+            nodo(
+                'small',
+                equipo.league || 'Liga no disponible',
+                'text-secondary'
+            )
         );
 
         boton.appendChild(datos);
-        boton.addEventListener('click', () => cargarDetalle(equipo.id));
+
+        boton.addEventListener('click', () => {
+            cargarDetalle(equipo.id);
+        });
 
         columna.appendChild(boton);
         equiposNodo.appendChild(columna);
@@ -150,6 +180,7 @@ async function cargarEquipos() {
     ++versionDetalle;
 
     equipos = [];
+
     equiposNodo.replaceChildren();
     detalleNodo.replaceChildren();
 
@@ -159,7 +190,8 @@ async function cargarEquipos() {
     const termino = consulta.value.trim();
 
     if (!termino) {
-        estado.textContent = 'Escribí el nombre de un equipo para buscar.';
+        estado.textContent =
+            'Escribí el nombre de un equipo para buscar.';
         return;
     }
 
@@ -169,9 +201,12 @@ async function cargarEquipos() {
     try {
         const encontrados = await solicitarEquipo('search', termino);
 
-        if (version !== versionLista) return;
+        if (version !== versionLista) {
+            return;
+        }
 
         equipos = encontrados.filter(e => e && e.id && e.name);
+
         pintarEquipos();
 
     } catch (error) {
@@ -195,10 +230,16 @@ function mostrarDetalle(equipo, mensaje) {
         'escudo-detalle'
     );
 
-    if (imagen) detalleNodo.appendChild(imagen);
+    if (imagen) {
+        detalleNodo.appendChild(imagen);
+    }
 
     detalleNodo.appendChild(
-        nodo('h3', equipo.alternate || equipo.name, 'h4 mt-3')
+        nodo(
+            'h3',
+            equipo.alternate || equipo.name,
+            'h4 mt-3'
+        )
     );
 
     const tabla = nodo('dl', null, 'row');
@@ -247,31 +288,46 @@ function mostrarDetalle(equipo, mensaje) {
 }
 
 async function cargarDetalle(id) {
-    if (!/^\d+$/.test(String(id))) return;
+    if (!/^\d+$/.test(String(id))) {
+        return;
+    }
 
     const version = ++versionDetalle;
-    const respaldo = equipos.find(e => String(e.id) === String(id));
+
+    const respaldo = equipos.find(
+        e => String(e.id) === String(id)
+    );
 
     detalleNodo.replaceChildren();
-    estadoDetalle.textContent = 'Consultando detalles del equipo...';
+
+    estadoDetalle.textContent =
+        'Consultando detalles del equipo...';
 
     try {
         const encontrados = await solicitarEquipo('id', String(id));
 
-        if (version !== versionDetalle) return;
+        if (version !== versionDetalle) {
+            return;
+        }
 
         const equipo =
-            encontrados.find(e => String(e.id) === String(id)) ||
-            encontrados[0];
+            encontrados.find(
+                e => String(e.id) === String(id)
+            ) || encontrados[0];
 
         if (!equipo) {
             throw new Error('No se encontró el equipo solicitado.');
         }
 
-        mostrarDetalle(equipo, 'Detalles actualizados desde RapidAPI.');
+        mostrarDetalle(
+            equipo,
+            'Detalles actualizados desde RapidAPI.'
+        );
 
     } catch (error) {
-        if (version !== versionDetalle) return;
+        if (version !== versionDetalle) {
+            return;
+        }
 
         if (respaldo) {
             mostrarDetalle(
@@ -287,12 +343,27 @@ async function cargarDetalle(id) {
 
 async function cargarLigas() {
     botonLigas.disabled = true;
+
     listaLigas.replaceChildren();
 
     estadoLigas.textContent = 'Consultando ligas...';
 
     try {
-        const respuesta = await fetch(`${API_PROXY}/leagues`);
+        const respuesta = await fetch(LEAGUES_URL, {
+            headers: {
+                'x-rapidapi-key': API_KEY,
+                'x-rapidapi-host': API_HOST,
+                Accept: 'application/json'
+            }
+        });
+
+        if (respuesta.status === 401 || respuesta.status === 403) {
+            throw new Error('Acceso denegado a TeamBase');
+        }
+
+        if (respuesta.status === 429) {
+            throw new Error('Se alcanzó el límite de consultas');
+        }
 
         if (!respuesta.ok) {
             throw new Error(`HTTP ${respuesta.status}`);
@@ -304,14 +375,22 @@ async function cargarLigas() {
             throw new Error('Formato de ligas no reconocido.');
         }
 
-        const ligas = datos.leagues.filter(l => l && l.name);
+        const ligas = datos.leagues.filter(
+            l => l && l.name
+        );
 
         for (const liga of ligas) {
-            const elemento = nodo('li', liga.name, 'list-group-item');
+            const elemento = nodo(
+                'li',
+                liga.name,
+                'list-group-item'
+            );
+
             listaLigas.appendChild(elemento);
         }
 
-        estadoLigas.textContent = `${ligas.length} liga(s) recibida(s).`;
+        estadoLigas.textContent =
+            `${ligas.length} liga(s) recibida(s).`;
 
     } catch (error) {
         estadoLigas.textContent =
@@ -324,7 +403,9 @@ async function cargarLigas() {
 botonCargar.addEventListener('click', cargarEquipos);
 
 consulta.addEventListener('keydown', e => {
-    if (e.key === 'Enter') cargarEquipos();
+    if (e.key === 'Enter') {
+        cargarEquipos();
+    }
 });
 
 buscar.addEventListener('input', pintarEquipos);
