@@ -1,0 +1,218 @@
+/* Pulso SV · Guía 3 · CSS Grid.
+   Integración de la propuesta de Claude con las rutas de la carpeta Guía 3.
+   Este archivo se carga después de portal.css. */
+.inicio {
+  --superficie: #1c1c1c;
+  --borde: #4d4d4d;
+  --acento: #7089ba;
+  --acento-claro: #9fb2dd;
+  --texto-suave: #aeb0ba;
+}
+
+/* 1. Estructura principal */
+.inicio main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "hero" "destacados" "vision";
+}
+.inicio .hero { grid-area: hero; }
+.inicio .destacados-seccion { grid-area: destacados; }
+.inicio .vision { grid-area: vision; }
+
+/* 2. Hero con índice lateral */
+.inicio .hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  grid-template-areas:
+    "etiqueta indice"
+    "titulo   indice"
+    "intro    indice"
+    "acciones indice";
+  column-gap: 64px;
+  align-items: start;
+}
+.inicio .hero-etiqueta { grid-area: etiqueta; }
+.inicio .hero-intro { grid-area: intro; }
+.inicio .hero-acciones { grid-area: acciones; }
+.inicio .hero-titulo {
+  grid-area: titulo;
+  max-width: none;
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  text-wrap: balance;
+}
+.inicio .hero-indice { grid-area: indice; align-self: center; }
+.inicio .hero-indice .eyebrow { margin: 0; }
+.inicio .indice-lista {
+  display: grid;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.inicio .indice-lista a {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 4px 12px;
+  padding: 16px 0;
+  border-bottom: 1px dashed var(--borde);
+  transition: color .3s ease, padding-left .35s ease;
+}
+.inicio .indice-lista li:last-child a {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.inicio .indice-lista a:hover {
+  padding-left: 8px;
+  color: var(--acento-claro);
+}
+.inicio .indice-num {
+  font: 800 .85rem Manrope, sans-serif;
+  letter-spacing: .08em;
+  color: var(--acento);
+}
+.inicio .indice-texto { display: grid; gap: 2px; }
+.inicio .indice-texto strong { font: 700 1.05rem Manrope, sans-serif; }
+.inicio .indice-texto small { font-size: .88rem; color: var(--texto-suave); }
+
+/* 3. Cabecera editorial */
+.inicio .seccion-cabecera {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-areas: "etiqueta etiqueta" "titulo nota";
+  gap: 4px 48px;
+  align-items: end;
+}
+.inicio .seccion-cabecera .eyebrow { grid-area: etiqueta; }
+.inicio .seccion-cabecera .section-title { grid-area: titulo; margin: 0; }
+.inicio .seccion-cabecera .muted { grid-area: nota; margin: 0; }
+
+/* 4. Noticias: doce columnas */
+.inicio .destacados {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+.inicio .card-principal {
+  grid-column: 1 / span 7;
+  grid-row: 1 / span 2;
+  display: grid;
+  grid-template-rows: minmax(220px, 1fr) auto;
+}
+.inicio .card-lateral {
+  grid-column: 8 / span 5;
+  display: grid;
+  grid-template-columns: minmax(96px, 34%) minmax(0, 1fr);
+}
+.inicio .destacados .card .body {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+.inicio .destacados .card h3,
+.inicio .destacados .card p { margin: 0; }
+.inicio .destacados .card .gold {
+  justify-self: start;
+  margin-top: 6px;
+  font-weight: 700;
+  transition: color .3s ease;
+}
+.inicio .destacados .card .gold:hover { color: var(--acento-claro); }
+.inicio .card-principal .visual {
+  height: auto;
+  font-size: 5rem;
+  border-bottom: 1px dashed var(--borde);
+}
+.inicio .card-principal h3 { font-size: 1.7rem; }
+.inicio .card-lateral .visual {
+  height: auto;
+  font-size: 2.6rem;
+  border-right: 1px dashed var(--borde);
+}
+.inicio .card.reveal { animation-fill-mode: backwards; }
+.inicio .destacados .card:nth-child(2) { animation-delay: .12s; }
+.inicio .destacados .card:nth-child(3) { animation-delay: .24s; }
+
+/* 5. Nuestra visión */
+.inicio .vision-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  grid-template-areas: "etiqueta texto" "titulo texto";
+  gap: 6px 56px;
+  align-content: center;
+  align-items: center;
+  padding: 44px;
+}
+.inicio .vision-grid .eyebrow { grid-area: etiqueta; align-self: end; }
+.inicio .vision-grid .section-title {
+  grid-area: titulo;
+  align-self: start;
+  margin: 0;
+}
+.inicio .vision-texto { grid-area: texto; margin: 0; font-size: 1.08rem; }
+
+/* 6. Créditos */
+.inicio .footer .wrap {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  justify-content: normal;
+  gap: 6px 24px;
+}
+
+/* 7. Responsive */
+@media (max-width: 960px) {
+  .inicio .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "etiqueta" "titulo" "intro" "acciones" "indice";
+  }
+  .inicio .hero-indice { align-self: stretch; margin-top: 44px; }
+  .inicio .indice-lista {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 24px;
+  }
+  .inicio .indice-lista a {
+    grid-template-columns: minmax(0, 1fr);
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+  .inicio .destacados { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .inicio .card-principal { grid-column: 1 / -1; grid-row: auto; }
+  .inicio .card-lateral { grid-column: auto; }
+  .inicio .vision-grid { gap: 6px 40px; padding: 32px; }
+}
+@media (max-width: 760px) {
+  .inicio .indice-lista { grid-template-columns: minmax(0, 1fr); }
+  .inicio .indice-lista a {
+    grid-template-columns: 2.6rem minmax(0, 1fr);
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--borde);
+  }
+  .inicio .indice-lista li:last-child a {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+  .inicio .seccion-cabecera {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "etiqueta" "titulo" "nota";
+  }
+  .inicio .seccion-cabecera .muted { margin-top: 8px; }
+  .inicio .destacados { grid-template-columns: minmax(0, 1fr); }
+  .inicio .card-lateral { grid-column: 1 / -1; }
+  .inicio .card-principal .visual { min-height: 160px; }
+  .inicio .card-principal h3 { font-size: 1.4rem; }
+  .inicio .vision-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "etiqueta" "titulo" "texto";
+    padding: 28px;
+  }
+  .inicio .vision-grid .section-title { margin-bottom: 8px; }
+  .inicio .footer .wrap { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 520px) {
+  .inicio .card-lateral { grid-template-columns: minmax(0, 1fr); }
+  .inicio .card-lateral .visual {
+    min-height: 96px;
+    border-right: 0;
+    border-bottom: 1px dashed var(--borde);
+  }
+}

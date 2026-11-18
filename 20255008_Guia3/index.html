@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía 3 | Desarrollo Web I</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #0c1018; color: #f5f5f5; font-family: "Segoe UI", Arial, sans-serif; }
+        main { max-width: 1050px; margin: auto; padding: 5rem 1.5rem; }
+        .eyebrow { color: #d9b976; letter-spacing: .2em; text-transform: uppercase; }
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1.5rem; margin-top: 3rem; }
+        .card { padding: 2rem; border: 1px solid #343b48; border-radius: 16px; background: #171d28; }
+        a { color: #e6c787; }
+        .card a { display: inline-block; margin-top: 1rem; }
+        p { line-height: 1.65; color: #c4c9d2; }
+    </style>
+</head>
+<body>
+    <main>
+        <p class="eyebrow">ESEN · Desarrollo Web I · 2026</p>
+        <h1>Guía 3</h1>
+        <p>Posicionamiento, visualización y maquetación de sitios web.</p>
+        <div class="grid">
+            <article class="card"><h2>Ejemplo 1</h2><p>Las siete maravillas del mundo moderno: Flexbox y posicionamiento.</p><a href="ejemplo1/index.html">Abrir ejemplo</a></article>
+            <article class="card"><h2>Ejemplo 2</h2><p>Compañía Miau: menú lateral interactivo con CSS.</p><a href="ejemplo2/index.html">Abrir ejemplo</a></article>
+            <article class="card"><h2>Ejercicio</h2><p>Cartas superpuestas con posicionamiento y z-index.</p><a href="ejercicio/ejercicio.html">Resultado 1</a> · <a href="ejercicio/ejercicio2.html">Resultado 2</a></article>
+            <article class="card"><h2>Reto IA</h2><p>Rediseño de Pulso SV con CSS Grid, basado en la propuesta de Claude.</p><a href="reto-ia/pulso-sv/index.html">Abrir Pulso SV</a></article>
+        </div>
+    </main>
+</body>
+</html>

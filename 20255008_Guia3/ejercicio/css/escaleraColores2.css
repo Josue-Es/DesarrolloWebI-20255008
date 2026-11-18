@@ -1,0 +1,14 @@
+/* Resultado 2: el diez de diamantes se muestra por delante.
+   Las cartas siguientes se desplazan hacia abajo y a la derecha. */
+* { box-sizing: border-box; }
+body { margin: 0; padding: 24px; font-family: Georgia, serif; background: white; color: #111; }
+h1 { margin: 0 0 35px; font-size: 2rem; }
+.cartas { position: relative; width: 260px; height: 195px; margin: 0 0 18px 70px; }
+.cartas > div { position: absolute; width: 72px; }
+.cartas img { display: block; width: 72px; height: auto; }
+#diez_de_diamantes { top: 0; left: 0; z-index: 5; }
+#sota_de_diamantes { top: 13px; left: 13px; z-index: 4; }
+#reina_de_diamantes { top: 26px; left: 26px; z-index: 3; }
+#rey_de_diamantes { top: 39px; left: 39px; z-index: 2; }
+#as_de_diamantes { top: 52px; left: 52px; z-index: 1; }
+a { color: #264e8a; }
