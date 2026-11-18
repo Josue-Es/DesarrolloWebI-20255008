@@ -1,18 +1,11 @@
-# Instrucciones utilizadas para desarrollar Pulso SV
+# Prompt para el Reto IA - Guía 2
 
-Herramienta utilizada en esta sesión: ChatGPT.
+Quiero mejorar mi sitio salvadoreño Pulso SV, que trata sobre tecnología, entretenimiento y temas digitales. Ya tengo una versión inicial y quiero actualizarla para que se vea más completa y profesional, sin cambiar la idea del sitio.
 
-## Prompt general
-Desarrolla un sitio académico salvadoreño de noticias de tecnología y entretenimiento, inspirado en la estructura editorial de Slashdot pero con contenido y diseño originales. Construye tres páginas enlazadas: inicio, noticias y contacto. Usa HTML semántico, CSS externo y JavaScript básico solo para la demostración del formulario. Aplica el sistema visual descrito en DESIGN.md: lienzo negro, superficies grafito, texto claro, acentos dorados, Manrope y DM Sans, ancho máximo de 1160px, tarjetas sobrias y animaciones discretas. Incluye navegación accesible, estados hover y focus, responsive y prefers-reduced-motion. No inventes noticias actuales: identifica los artículos como ejemplos. Mantén archivos listos para GitHub Pages.
+Para el diseño utiliza el estilo Index de Refero, siguiendo el archivo design.md que adjunto. Me gustaría mantener un estilo oscuro y sencillo, con fondo negro, secciones grises, letras claras y detalles en azul. Aplica ese mismo diseño a todas las páginas para que se vean como parte de un solo sitio.
 
-## Página 1 — Inicio
-Crear hero editorial con titular, introducción, botones de navegación y tres tarjetas de temas destacados. Incluir texto aclaratorio sobre contenido de demostración.
+Necesito tres páginas conectadas: Inicio, Noticias y Contacto. En Inicio quiero presentar el portal y mostrar noticias destacadas. En Noticias quiero varias publicaciones relacionadas con El Salvador, y que al seleccionar una noticia se pueda leer su contenido, no solamente ver una tarjeta. En Contacto agrega un formulario sencillo y que combine con el diseño.
 
-## Página 2 — Noticias
-Crear listado de seis artículos de ejemplo agrupados por etiquetas temáticas, más un panel de categorías. Mantener diseño y navegación compartidos.
+Agrega transiciones o animaciones suaves en las tarjetas y botones para que la página tenga algo de movimiento. También quiero que el menú y los enlaces funcionen bien, que se pueda navegar entre las tres páginas y que el diseño se adapte a computadora y celular.
 
-## Página 3 — Contacto
-Crear formulario con nombre, email y mensaje. Validar con HTML5; JavaScript mostrará confirmación local sin enviar información a servidor. Añadir aclaración explícita sobre esa limitación.
-
-## Registro de decisiones
-Inspiración editorial: Slashdot Entertainment, mencionada por el estudiante. Referencia visual: ejemplo Warp en Refero. Adaptación visual: negro, grafito y dorado, según preferencias del estudiante.
+Puedes usar HTML, CSS y JavaScript cuando haga falta. Organiza los archivos y escribe el código de forma ordenada, con saltos de línea, para poder revisarlo y modificarlo en Visual Studio Code. Conserva lo que ya funciona en Pulso SV y entrégame las tres páginas actualizadas.
